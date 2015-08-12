@@ -161,6 +161,7 @@ owasp.config({
   minLength              : 10,
   minPhraseLength        : 20,
   minOptionalTestsToPass : 4,
+  i18nErrorKeys          : false,
 });
 ```
 
@@ -184,6 +185,12 @@ Whereby:
   OWASP guidelines), four optional complexity tests are made, and a password
   must pass at least three of them in order to be considered "strong". 
 
+- `i18nErrorKeys` is a `boolean` that toggles the i18n error keys in place of
+  english error messages. This can be useful when translating the errors using
+  a 3rd party i18n library. When true the following keys can be returned:
+  `failedMinLength`, `failedMaxLength`, `failedThreeRepeatedChars`,
+  `optionalLowercaseRequired`, `optionalUppercaseRequired`,
+  `optionalNumberRequired` and `optionalSpecialCharRequired`.
 
 Extending
 ---------

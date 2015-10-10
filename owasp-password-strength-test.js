@@ -21,6 +21,7 @@
       minLength              : 10,
       minPhraseLength        : 20,
       minOptionalTestsToPass : 4,
+      i18nErrorKeys          : false,
     };
 
     // This method makes it more convenient to set config parameters
@@ -42,21 +43,27 @@
         // enforce a minimum length
         function(password) {
           if (password.length < owasp.configs.minLength) {
-            return 'The password must be at least ' + owasp.configs.minLength + ' characters long.';
+            return owasp.configs.i18nErrorKeys
+              ? 'failedMinLength'
+              : 'The password must be at least ' + owasp.configs.minLength + ' characters long.';
           }
         },
 
         // enforce a maximum length
         function(password) {
           if (password.length > owasp.configs.maxLength) {
-            return 'The password must be fewer than ' + owasp.configs.maxLength + ' characters.';
+            return owasp.configs.i18nErrorKeys
+              ? 'failedMaxLength'
+              : 'The password must be fewer than ' + owasp.configs.maxLength + ' characters.';
           }
         },
 
         // forbid repeating characters
         function(password) {
           if (/(.)\1{2,}/.test(password)) {
-            return 'The password may not contain sequences of three or more repeated characters.';
+            return owasp.configs.i18nErrorKeys
+              ? 'failedThreeRepeatedChars'
+              : 'The password may not contain sequences of three or more repeated characters.';
           }
         },
 
@@ -76,28 +83,36 @@
         // require at least one lowercase letter
         function(password) {
           if (!/[a-z]/.test(password)) {
-            return 'The password must contain at least one lowercase letter.';
+            return owasp.configs.i18nErrorKeys
+              ? 'optionalLowercaseRequired'
+              : 'The password must contain at least one lowercase letter.';
           }
         },
 
         // require at least one uppercase letter
         function(password) {
           if (!/[A-Z]/.test(password)) {
-            return 'The password must contain at least one uppercase letter.';
+            return owasp.configs.i18nErrorKeys
+              ? 'optionalUppercaseRequired'
+              : 'The password must contain at least one uppercase letter.';
           }
         },
 
         // require at least one number
         function(password) {
           if (!/[0-9]/.test(password)) {
-            return 'The password must contain at least one number.';
+            return owasp.configs.i18nErrorKeys
+              ? 'optionalNumberRequired'
+              : 'The password must contain at least one number.';
           }
         },
 
         // require at least one special character
         function(password) {
           if (!/[^A-Za-z0-9]/.test(password)) {
-            return 'The password must contain at least one special character.';
+            return owasp.configs.i18nErrorKeys
+              ? 'optionalSpecialCharRequired'
+              : 'The password must contain at least one special character.';
           }
         },
 

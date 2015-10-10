@@ -124,17 +124,40 @@ describe('configs', function() {
       minLength              : 5,
       minPhraseLength        : 5,
       minOptionalTestsToPass : 5,
+      i18nErrorKeys          : true,
     });
     owasp.configs.allowPassphrases.should.be.false;
     owasp.configs.maxLength.should.be.exactly(5);
     owasp.configs.minLength.should.be.exactly(5);
     owasp.configs.minPhraseLength.should.be.exactly(5);
     owasp.configs.minOptionalTestsToPass.should.be.exactly(5);
+    owasp.configs.i18nErrorKeys.should.be.true;
   });
 
   it('should reject invalid parameter keys', function() {
     owasp.config({ foo: 'bar' });
     owasp.configs.should.not.have.property('foo');
+  });
+
+});
+
+describe('i18n', function() {
+
+  it('should return i18 error keys', function() {
+    owasp.config({
+      allowPassphrases       : true,
+      maxLength              : 50,
+      minLength              : 10,
+      minPhraseLength        : 20,
+      minOptionalTestsToPass : 3,
+      i18nErrorKeys          : true,
+    });
+    var result = owasp.test('L0eSex');
+    result.errors.should.have.length(2);
+    result.requiredTestErrors.should.have.length(1);
+    result.requiredTestErrors[0].should.be.exactly('failedMinLength');
+    owasp.configs.minLength.should.be.exactly(10);
+    result.optionalTestErrors[0].should.be.exactly('optionalSpecialCharRequired');
   });
 
 });

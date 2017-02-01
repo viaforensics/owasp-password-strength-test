@@ -30,6 +30,13 @@ interface PasswordTestConfiguration {
     minPhraseLength?: number;
     /** minimum number of optional tests that a password must pass in order to be considered "strong". By default (per the OWASP guidelines), four optional complexity tests are made, and a password must pass at least three of them in order to be considered "strong" */
     minOptionalTestsToPass?: number;
+    /**
+     * toggles the i18n error keys in place of english error messages.
+     * This can be useful when translating the errors using a 3rd party i18n library.
+     * When true the following keys can be returned:
+     * `failedMinLength`, `failedMaxLength`, `failedThreeRepeatedChars`, `optionalLowercaseRequired`, `optionalUppercaseRequired`, `optionalNumberRequired` and `optionalSpecialCharRequired`.
+     */
+    i18nErrorKeys?: boolean;
 }
 
 type PasswordTest = (password: string) => boolean;

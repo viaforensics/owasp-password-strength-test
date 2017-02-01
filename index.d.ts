@@ -1,4 +1,5 @@
-export default owaspPasswordStrengthTest;
+export as namespace owaspPasswordStrengthTest;
+export = owaspPasswordStrengthTest;
 
 interface PasswordTestResult {
     /** error messages associated with the failed tests */
@@ -33,7 +34,7 @@ interface PasswordTestConfiguration {
 
 type PasswordTest = (password: string) => boolean;
 
-export declare namespace owaspPasswordStrengthTest {
+declare namespace owaspPasswordStrengthTest {
     export function test(password: string): PasswordTestResult;
     export function config(configuration: PasswordTestConfiguration): void;
 

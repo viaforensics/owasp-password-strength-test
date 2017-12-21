@@ -1,5 +1,5 @@
 export as namespace owaspPasswordStrengthTest;
-export default owaspPasswordStrengthTest;
+export = owaspPasswordStrengthTest;
 
 interface PasswordTestResult {
     /** error messages associated with the failed tests */

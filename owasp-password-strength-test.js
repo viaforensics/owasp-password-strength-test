@@ -49,7 +49,7 @@
         // enforce a maximum length
         function(password) {
           if (password.length > owasp.configs.maxLength) {
-            return 'The password must be fewer than ' + owasp.configs.maxLength + ' characters.';
+            return 'The password must be at most ' + owasp.configs.maxLength + ' characters.';
           }
         },
 
